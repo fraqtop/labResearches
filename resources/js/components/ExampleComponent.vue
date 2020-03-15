@@ -104,13 +104,6 @@
                     })
                     this.regroupResearches()
                 })
-            window.axios.get(window.config.routes.holidays)
-                .then(response => {
-                    window.moment.updateLocale('ru', {
-                        holidays: response.data,
-                        holidayFormat: 'MM-DD-YYYY'
-                    })
-                })
         },
         methods: {
             addResearch() {
