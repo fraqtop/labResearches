@@ -17,9 +17,6 @@ class CreateHolidaysTable extends Migration
             $table->date('date');
             $table->timestamps();
         });
-        \App\Holiday::insert([
-            ['date' => '']
-        ]);
     }
 
     /**
