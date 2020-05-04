@@ -1,34 +1,55 @@
 <template>
   <b-container>
-    <b-row>
-      <b-col>
-        <b-input placeholder="начните вводить код"/>
-      </b-col>
-    </b-row>
     <div class="mt-3">
       <h4>Список доступных анализов</h4>
-      <price-table :items="analyses"/>
+      <price-table
+        :items="analyses"
+        v-on:filtersChanged="loadAnalyses"
+      />
     </div>
+    <b-row class="centered">
+      <b-col class="w-50 p-0" style="max-width: 50%">
+        <custom-pagination v-show="!isLastPage" @click.native="loadAnalyses"/>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
 <script>
   import PriceTable from "./partial/PriceTable"
+  import Pagination from "./partial/Pagination"
 
   export default {
     name: "PriceList",
     components: {
+      'custom-pagination': Pagination,
       'price-table': PriceTable
     },
     data() {
       return {
-        analyses: null
+        analyses: null,
+        filters: '',
+        pageNumber: 1,
+        isLastPage: false
       }
     },
     created() {
-      window.axios(this.$config.analyses)
-        .then(response => this.analyses = response.data.items)
-        .catch(error => console.log(error))
+      this.loadAnalyses()
+    },
+    methods: {
+      loadAnalyses(payload) {
+        if (payload && payload.query !== undefined) {
+          this.filters = payload.query
+          this.pageNumber = 1
+        }
+        axios(`${this.$config.analyses}?page=${this.pageNumber}${this.filters}`)
+          .then(response => {
+            this.analyses = this.pageNumber === 1 ? response.data.items: this.analyses.concat(response.data.items)
+            this.pageNumber += 1
+            this.isLastPage = response.data.links.next === null
+          })
+          .catch(error => console.log(error))
+      },
     }
   }
 </script>

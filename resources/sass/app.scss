@@ -12,3 +12,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.clickable {
+  cursor: pointer;
+  transition: all 0.5s;
+  &:hover {
+    opacity: 0.7;
+  }
+}

@@ -10888,3 +10888,12 @@ a.text-dark:focus {
   align-items: center;
 }
 
+.clickable {
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.clickable:hover {
+  opacity: 0.7;
+}
+

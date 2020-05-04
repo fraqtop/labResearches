@@ -5,7 +5,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/price-list', function () {
+Route::get('/analyses', function () {
     return view('prices.list');
 });
 
