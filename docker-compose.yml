@@ -1,0 +1,56 @@
+version: "3"
+networks:
+  main:
+    driver: bridge
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 8000:80
+    volumes:
+      - ./docker/nginx/logs:/etc/logs/nginx
+      - ./:/web
+      - ./docker/nginx/conf:/etc/nginx/conf.d
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80
+    command: nginx -g "daemon off;"
+    networks:
+      main:
+        aliases:
+          - nginx
+
+  php:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/web
+    user: 1000:1000
+    networks:
+      main:
+        aliases:
+          - php
+
+  composer:
+    image: composer:1.9
+    working_dir: /web
+    volumes:
+      - ./:/web
+    command: tail -f /dev/null
+
+  database:
+    image: mysql:5.7
+    volumes:
+      - ./docker/database/data:/var/lib/mysql
+      - ./docker/database/conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_DATABASE: ${LAB_DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${LAB_DB_PASSWORD}
+    env_file:
+      - .env
+    networks:
+      main:
+        aliases:
+          - database
