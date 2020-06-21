@@ -54,3 +54,19 @@ services:
       main:
         aliases:
           - database
+
+  node:
+    image: node:14.4-alpine3.11
+    working_dir: /web
+    env_file:
+      - .env
+    volumes:
+      - ./:/web
+    ports:
+      - 3000:3000
+      - 3001:3001
+    command: npm run watch
+    networks:
+      main:
+        aliases:
+          - vue

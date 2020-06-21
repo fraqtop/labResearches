@@ -92600,8 +92600,8 @@ var apiRoot = "".concat(window.location.origin, "/api");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/fraqtop/projects/labResearches/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/fraqtop/projects/labResearches/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /web/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /web/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

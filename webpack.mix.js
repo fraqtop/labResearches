@@ -16,4 +16,8 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.version()
 
-mix.browserSync('http://lab.local')
+mix.browserSync({
+    proxy: 'nginx',
+    open: false,
+    host: '0.0.0.0',
+})
