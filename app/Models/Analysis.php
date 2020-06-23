@@ -24,6 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Analysis wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Analysis whereTypeId($value)
  * @mixin \Eloquent
+ * @property string|null $executor
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Analysis whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Analysis whereExecutor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Analysis whereUpdatedAt($value)
  */
 class Analysis extends Model
 {
