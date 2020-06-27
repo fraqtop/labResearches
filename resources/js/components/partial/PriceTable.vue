@@ -1,13 +1,15 @@
 <template>
   <div>
-    <b-table striped hover :items="items" :fields="fields">
+    <b-table
+        striped
+        hover
+        :items="items"
+        :fields="fields"
+    >
       <template slot="top-row" slot-scope="{ fields }">
         <td v-for="field in fields" :key="field.key">
           <b-input v-if="!field.custom" v-model="filters[field.key]" :placeholder="field.label"/>
         </td>
-      </template>
-      <template slot="cell(link)" slot-scope="data" class="clickable">
-        <a :href="data.item['self-link']">перейти</a>
       </template>
     </b-table>
   </div>
@@ -74,7 +76,7 @@
                 filtersQuery += `&filters[like:${property}]=${this.filters[property]}`
               }
             }
-            this.$emit('filtersChanged', { query: filtersQuery })
+            this.$emit('filtersChanged', {query: filtersQuery})
           }, 1000)
         },
         deep: true
@@ -84,5 +86,7 @@
 </script>
 
 <style scoped>
-
+  table {
+    cursor: pointer;
+  }
 </style>

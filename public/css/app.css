@@ -10897,3 +10897,12 @@ a.text-dark:focus {
   opacity: 0.7;
 }
 
+a {
+  color: #333333;
+}
+
+a:hover,
+a:visited {
+  text-decoration: none;
+}
+
