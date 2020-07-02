@@ -3,4 +3,6 @@
 
 Route::get('/{any}', function () {
     return view('spa');
-})->where('any', '.*');
+})->where('any', '.*')->name('default');
+
+Route::auth();
