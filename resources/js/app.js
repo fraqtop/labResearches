@@ -9,15 +9,24 @@ require('./bootstrap');
 import BootstrapVue from 'bootstrap-vue'
 import config from "./config"
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import auth from './vuex/auth'
 import App from "./components/App";
 import routes from "./routes";
 
 const router = new VueRouter({
-    mode: 'history',
-    routes: routes,
+  mode: 'history',
+  routes: routes,
 });
 
 window.Vue = require('vue');
+window.Vue.use(Vuex)
+
+const store = new Vuex.Store({
+  modules: {
+    auth
+  }
+})
 
 window.Vue.use(BootstrapVue)
 window.Vue.use(VueRouter)
@@ -30,7 +39,8 @@ window.Vue.prototype.$config = config
  */
 
 const app = new Vue({
-    el: '#app',
-    components: { App },
-    router
+  el: '#app',
+  components: {App},
+  router,
+  store
 });
