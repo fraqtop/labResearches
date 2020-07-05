@@ -1,6 +1,8 @@
 import Index from "./components/Index";
-import PriceList from "./components/PriceList";
+import PriceList from "./components/price/PriceList";
 import Login from "./components/Login";
+import ResearchesList from "./components/researches/List";
+import NewResearch from './components/researches/New';
 
 export default [
   {
@@ -18,5 +20,23 @@ export default [
     name: 'Login',
     component: Login,
     meta: {layout: 'empty'}
+  },
+  {
+    path: '/researches',
+    component: {
+      render (c) { return c('router-view') }
+    },
+    children: [
+      {
+        path: 'new',
+        name: 'NewResearch',
+        component: NewResearch
+      },
+      {
+        path: '',
+        name: 'ResearchesList',
+        component: ResearchesList
+      }
+    ]
   }
 ]

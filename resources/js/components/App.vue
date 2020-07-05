@@ -31,7 +31,7 @@
       checkRequiredHeaders() {
         let commonHeaders = window.axios.defaults.headers.common;
         if (!commonHeaders['X-XSRF-TOKEN']) {
-          window.axios.get(this.$config.csrf)
+          window.axios.get(this.$config.routes.csrf)
             .then(response => commonHeaders['X-XSRF-TOKEN'] = response.config.headers['X-XSRF-TOKEN'])
         }
         if (!commonHeaders['Authorization'] && this.$route.path !== '/login') {

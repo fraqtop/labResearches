@@ -25,7 +25,7 @@ export default {
   actions: {
     login({commit, getters}, authData) {
       return new Promise((resolve, reject) => {
-        window.axios.post(this._vm.$config.login, authData)
+        window.axios.post(this._vm.$config.routes.login, authData)
           .then(response => {
             console.log(response.data)
             this.commit('setUserData', response.data)

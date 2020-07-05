@@ -1,12 +1,12 @@
 <template>
   <div>
-    <navbar/>
+    <navbar class="mb-5"/>
     <router-view/>
   </div>
 </template>
 
 <script>
-  import Navbar from "../partial/Navbar";
+  import Navbar from "../Navbar";
 
   export default {
     name: "Layout",
