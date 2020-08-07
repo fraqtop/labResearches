@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\MaterialType;
+use App\Services\MaterialTypeService;
 use Illuminate\Http\Request;
 
 class MaterialTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct(MaterialTypeService $modelService)
     {
-        //
+        parent::__construct($modelService);
     }
 
     /**

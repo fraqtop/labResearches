@@ -3,23 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Services\AnalysisService;
+use App\Services\Service;
 use Illuminate\Http\Request;
 use App\Http\Resources\AnalysisCollection;
 use App\Models\Analysis;
 
 class AnalysisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @param Request $request
-     * @param AnalysisService $analysisService
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index(Request $request, AnalysisService $analysisService)
+
+    public function __construct(AnalysisService $modelService)
     {
-        $query = $analysisService->load($request->get('filters'));
-        return (new AnalysisCollection($query->paginate($this->perPage)))->response();
+        parent::__construct($modelService);
     }
 
     /**

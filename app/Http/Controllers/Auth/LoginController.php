@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Helpers\ExceptionFactory;
+use App\Exceptions\Custom\NotFoundException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
@@ -18,7 +18,7 @@ class LoginController extends Controller
                 'username' => Auth::user()->name
             ];
         } else {
-            ExceptionFactory::userNotFound();
+            throw new NotFoundException($credentials);
         }
     }
 }

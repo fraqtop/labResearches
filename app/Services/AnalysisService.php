@@ -4,19 +4,21 @@
 namespace App\Services;
 
 
+use App\Http\Resources\AnalysisCollection;
 use App\Models\Analysis;
 
 class AnalysisService extends Service
 {
+    protected string $class = Analysis::class;
 
-    public function load(array $filters = null)
+    public function getCollectionClass(): string
     {
-        $query = Analysis::query();
-        if (!$filters) {
-            return $query;
-        }
-        $query = $this->applyFilters($query, (new Analysis())->getFillable(), $filters);
-        return $query;
+        return AnalysisCollection::class;
+    }
+
+    public function getValidators(): array
+    {
+        return [];
     }
 
 }

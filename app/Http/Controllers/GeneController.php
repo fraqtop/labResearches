@@ -5,27 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Gene;
 use App\Http\Resources\GeneResource;
 use App\Services\GeneService;
+use App\Services\Service;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class GeneController extends Controller
 {
-    private GeneService $geneService;
 
-    public function __construct(GeneService $geneService)
+    public function __construct(GeneService $modelService)
     {
-        $this->geneService = $geneService;
+        parent::__construct($modelService);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -50,7 +41,7 @@ class GeneController extends Controller
             'coords' => 'required',
         ]);
 
-        return new GeneResource($this->geneService->create($request->post()));
+        return new GeneResource($this->modelService->create($request->post()));
     }
 
     /**

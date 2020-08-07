@@ -50,11 +50,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        if ($request->wantsJson()) {
-            return response()->json([
-                'message' => $exception->getMessage() ?? 'Неизвестная ошибка',
-            ])->setStatusCode($exception->getCode() ?? 500);
-        }
         return parent::render($request, $exception);
     }
 }

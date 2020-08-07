@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Http\Resources\DictionaryCollection;
 use App\Models\GenotypeStatus;
 
 class GenotypeStatusService extends Service
@@ -12,6 +13,11 @@ class GenotypeStatusService extends Service
     public const ACCEPTABLE = 2;
     public const CORRUPTED = 3;
 
+    public function getCollectionClass(): string
+    {
+        return DictionaryCollection::class;
+    }
+
     public function getAll()
     {
         return [
@@ -19,10 +25,5 @@ class GenotypeStatusService extends Service
             static::ACCEPTABLE,
             static::CORRUPTED
         ];
-    }
-
-    public static function load($filters)
-    {
-        return GenotypeStatus::query();
     }
 }

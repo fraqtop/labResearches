@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Patient;
+use App\Services\PatientService;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct(PatientService $modelService)
     {
-        //
+        parent::__construct($modelService);
     }
 
     /**

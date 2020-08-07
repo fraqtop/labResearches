@@ -6,14 +6,42 @@ namespace App\Services;
 
 use App\Helpers\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\MassAssignmentException;
 
-class Service
+abstract class Service
 {
-    protected $error;
+    protected string $error;
+    protected string $class;
+
+    public abstract function getCollectionClass() : string;
+
+    public function getValidators(): array
+    {
+        return ['name', ['required']];
+    }
+
+    public function create(array $data)
+    {
+        $model = $this->class::create($data);
+        if (!$model) {
+            throw new MassAssignmentException('can\'t save model');
+        }
+        return $model;
+    }
 
     public function getErrorMessage()
     {
         return $this->error;
+    }
+
+    public function load(array $filters = null)
+    {
+        $query = $this->class::query();
+        if (!$filters) {
+            return $query;
+        }
+        $query = $this->applyFilters($query, (new $this->class())->getFillable(), $filters);
+        return $query;
     }
 
     /**
@@ -40,5 +68,6 @@ class Service
         }
         return $query;
     }
+
 
 }

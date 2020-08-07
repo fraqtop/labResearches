@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Research;
+use App\Services\ResearchService;
 use Illuminate\Http\Request;
 
 class ResearchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct(ResearchService $modelService)
     {
-        //
+        parent::__construct($modelService);
     }
 
     /**
@@ -23,17 +18,6 @@ class ResearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
     {
         //
     }

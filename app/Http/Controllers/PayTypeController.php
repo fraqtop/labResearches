@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\PayType;
+use App\Services\PayTypeService;
 use Illuminate\Http\Request;
 
 class PayTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct(PayTypeService $modelService)
     {
-        //
+        parent::__construct($modelService);
     }
 
     /**

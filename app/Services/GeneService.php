@@ -4,10 +4,22 @@
 namespace App\Services;
 
 
+use App\Http\Resources\GenotypesCollection;
 use App\Models\Gene;
 
 class GeneService extends Service
 {
+    public function getCollectionClass(): string
+    {
+        return GenotypesCollection::class;
+    }
+
+    public function getValidators(): array
+    {
+        return [];
+    }
+
+
     public function create(array $data)
     {
         $gene = Gene::create($data);

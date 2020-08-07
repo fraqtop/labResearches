@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Eloquent
  * @property int $genotype_status_id
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Genotype whereGenotypeStatusId($value)
+ * @property-read \App\Models\GenotypeStatus $status
  */
 class Genotype extends Model
 {

@@ -13,6 +13,7 @@ import Vuex from 'vuex'
 import auth from './vuex/auth'
 import App from "./components/App";
 import routes from "./routes";
+import moment from 'moment-business-days';
 
 const router = new VueRouter({
   mode: 'history',
@@ -28,9 +29,10 @@ const store = new Vuex.Store({
   }
 })
 
-window.Vue.use(BootstrapVue)
-window.Vue.use(VueRouter)
+window.Vue.use(BootstrapVue);
+window.Vue.use(VueRouter);
 window.Vue.prototype.$config = config
+window.Vue.prototype.$moment = moment
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -42,5 +44,5 @@ const app = new Vue({
   el: '#app',
   components: {App},
   router,
-  store
+  store,
 });

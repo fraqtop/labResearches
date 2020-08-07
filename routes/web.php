@@ -3,6 +3,6 @@
 
 Route::get('/{any}', function () {
     return view('spa');
-})->where('any', '.*')->name('default');
+})->where('any', '^(?!api).*$')->name('default');
 
 Route::auth();

@@ -28,5 +28,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Patient extends Model
 {
-    //
+    protected $fillable = ['name', 'mail', 'phone', 'birth_date'];
 }

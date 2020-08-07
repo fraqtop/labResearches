@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Institution;
+use App\Services\InstitutionService;
 use Illuminate\Http\Request;
 
 class InstitutionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct(InstitutionService $modelService)
     {
-        //
+        parent::__construct($modelService);
     }
 
     /**

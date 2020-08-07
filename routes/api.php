@@ -16,4 +16,10 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('analyses', 'AnalysisController');
     Route::resource('genes', 'GeneController');
+    Route::resource('patients', 'PatientController');
+    Route::resource('materials', 'MaterialTypeController');
+    Route::resource('pay-types', 'PayTypeController');
+    Route::resource('institutions', 'InstitutionController');
+    Route::resource('users', 'UserController');
+    Route::resource('researches', 'ResearchController');
 });

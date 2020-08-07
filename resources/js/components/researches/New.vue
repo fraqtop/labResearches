@@ -8,128 +8,144 @@
       <b-row>
         <b-col>
           <b-form-group>
-            <date-picker
-                :only-date="true"
-                :no-button-now="true"
-                :format="$config.datetimeFormat"
-                locale="ru"
+            <custom-date-picker
                 v-model="research.issuedAt"
-                label="Дата поступления"
+                placeholder="Дата поступления"
             />
           </b-form-group>
           <b-form-group>
-            <date-picker
-                :only-date="true"
-                :no-button-now="true"
-                :format="$config.datetimeFormat"
-                locale="ru"
+            <custom-date-picker
                 v-model="research.materialTakenAt"
-                label="Дата взятия образца"
+                placeholder="Дата взятия образца"
             />
           </b-form-group>
           <b-form-group>
             <live-search
+                v-model="research.patientId"
                 placeholder="Пациент"
                 link="patients"
-                v-on:chosen="setEntity"
             />
           </b-form-group>
           <b-form-group>
             <live-search
+                v-model="research.materialTypeId"
                 placeholder="Тип материала"
                 link="materials"
-                v-on:chosen="setEntity"
             />
           </b-form-group>
           <b-form-group>
             <live-search
+                v-model="research.payTypeId"
                 placeholder="Тип оплаты"
                 link="pay-types"
-                v-on:chosen="setEntity"
             />
           </b-form-group>
         </b-col>
         <b-col>
           <b-form-group>
             <live-search
+                v-model="analysis"
+                :is-needs-details="true"
                 placeholder="Исследование"
                 link="analyses"
-                v-on:chosen="setEntity"
                 search-field="code"
             />
           </b-form-group>
           <b-form-group>
             <live-search
+                v-model="research.initiatorId"
                 placeholder="Направвившее подразделение"
                 link="institutions"
-                v-on:chosen="setEntity"
             />
           </b-form-group>
           <b-form-group>
             <live-search
+                v-model="research.executorId"
                 placeholder="Подразделение исполнитель"
                 link="institutions"
-                v-on:chosen="setEntity"
             />
           </b-form-group>
           <b-form-group>
             <live-search
+                v-model="research.userId"
                 placeholder="Врач"
                 link="users"
-                v-on:chosen="setEntity"
             />
           </b-form-group>
           <b-form-group>
-            <b-input placeholder="Внутренний номер"/>
+            <b-input
+                v-model="research.innerNumber"
+                placeholder="Внутренний номер"
+            />
           </b-form-group>
         </b-col>
       </b-row>
       <b-row class="m-3">
         <b-col class="centered">
-          <b-button variant="success">Сохранить</b-button>
+          <b-button
+              @click="save"
+              variant="success"
+          >
+            Сохранить
+          </b-button>
           <p v-show="error" class="text-danger">{{error}}</p>
         </b-col>
       </b-row>
-    <b-jumbotron v-show="research.issuePlannedAt">
-      Планируемая дата выдачи результатов исследования {{research.issuePlannedAt}}
+    <b-jumbotron v-show="description">
+      {{description}}
     </b-jumbotron>
   </b-container>
 </template>
 
 <script>
   import LiveSearch from "../LiveSearch";
-  import DatePicker from "vue-ctk-date-time-picker"
-
+  import CustomDatePicker from "../CustomDatePicker";
 
   export default {
     name: "New",
-    components: {LiveSearch, DatePicker},
+    components: {CustomDatePicker, LiveSearch},
     data() {
       return {
-        research: {
-          innerNumber: null,
-          patientId: null,
-          initiatorId: null,
-          userId: null,
-          materialId: null,
-          analysisId: null,
-          payTypeId: null,
-          issuePlannedAt: null,
-          comment: null,
-          issuedAt: null,
-          materialTakenAt: null
-        },
-        error: null
+        research: {},
+        analysis: null,
+        error: null,
+        description: null
+      }
+    },
+    computed: {
+      dateStart: (vm) => vm.research.materialTakenAt,
+    },
+    watch: {
+      analysis: function () {
+        this.getPlanDate(this.analysis.duration);
+      },
+      dateStart: function () {
+        if (this.analysis) {
+          this.getPlanDate(this.analysis.duration);
+        }
       }
     },
     methods: {
-      setEntity(entity) {
-        console.log(entity)
-      }
+      getPlanDate(daysNumber) {
+        let date = this.research.materialTakenAt ?
+            this.$moment(this.research.materialTakenAt, this.$config.datetimeFormat) :
+            this.$moment();
+        this.research.issuePlanedAt = date
+            .businessAdd(daysNumber)
+            .format(this.$config.datetimeFormat);
+        this.description = this.setDescription();
+      },
+      setDescription() {
+        return `Исследование ${this.analysis.description}. Планируемая дата выдачи ${this.research.issuePlanedAt}`
+      },
+      save() {
+        if (this.analysis) {
+          this.research.analysisId = this.analysis.id;
+        }
+        window.axios.post(this.$config.routes.researches, this.research)
+          .then(response => {console.log('saved')})
+          .catch(error => console.log(error.response))
+      },
     }
   }
 </script>
-
-<style scoped>
-
-</style>
