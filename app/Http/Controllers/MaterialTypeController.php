@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\MaterialTypeService;
 use Illuminate\Http\Request;
 
-class MaterialTypeController extends Controller
+class MaterialTypeController extends ApiController
 {
 
     public function __construct(MaterialTypeService $modelService)

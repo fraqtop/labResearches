@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="fade-in">
     <b-row>
       <b-col class="border-bottom mb-3">
         <h1>Данные исследования</h1>

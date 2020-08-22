@@ -1,5 +1,5 @@
 <template>
-  <b-card class="text-center" header="Войдите в систему">
+  <b-card class="text-center fade-in" header="Войдите в систему">
     <b-form @submit.prevent="login">
       <b-form-group>
         <b-input

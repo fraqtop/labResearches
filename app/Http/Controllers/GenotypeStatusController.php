@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class GenotypeStatusController extends Controller
+class GenotypeStatusController extends ApiController
 {
 
     /**

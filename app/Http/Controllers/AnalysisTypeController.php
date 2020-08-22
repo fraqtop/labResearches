@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AnalysisType;
 use Illuminate\Http\Request;
 
-class AnalysisTypeController extends Controller
+class AnalysisTypeController extends ApiController
 {
 
     /**

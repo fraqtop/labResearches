@@ -9,7 +9,7 @@ use App\Services\Service;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class GeneController extends Controller
+class GeneController extends ApiController
 {
 
     public function __construct(GeneService $modelService)

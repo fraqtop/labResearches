@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\InstitutionService;
 use Illuminate\Http\Request;
 
-class InstitutionController extends Controller
+class InstitutionController extends ApiController
 {
     public function __construct(InstitutionService $modelService)
     {

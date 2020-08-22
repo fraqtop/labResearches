@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\PayTypeService;
 use Illuminate\Http\Request;
 
-class PayTypeController extends Controller
+class PayTypeController extends ApiController
 {
     public function __construct(PayTypeService $modelService)
     {

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\AnalysisCollection;
 use App\Models\Analysis;
 
-class AnalysisController extends Controller
+class AnalysisController extends ApiController
 {
 
     public function __construct(AnalysisService $modelService)

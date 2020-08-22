@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ResearchService;
 use Illuminate\Http\Request;
 
-class ResearchController extends Controller
+class ResearchController extends ApiController
 {
     public function __construct(ResearchService $modelService)
     {
