@@ -9,6 +9,8 @@ use App\Models\Gene;
 
 class GeneService extends Service
 {
+    protected string $class = Gene::class;
+
     public function getCollectionClass(): string
     {
         return GenotypesCollection::class;

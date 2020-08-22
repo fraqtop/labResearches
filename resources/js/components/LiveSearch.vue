@@ -5,7 +5,7 @@
           @focus="isFocused = true"
           @blur="handleBlur"
           v-model="query"
-          @keydown="handleInput"
+          @keyup="handleInput"
           :placeholder="placeholder"
       />
       <div
@@ -22,7 +22,7 @@
         </div>
       </div>
     </b-col>
-    <b-col md="2">
+    <b-col v-if="isAddable" md="2">
       <insert-modal v-on:saved="choose" :entity-type="link"/>
     </b-col>
   </b-row>
@@ -49,7 +49,7 @@
       searchOn: {
         type: Number,
         required: false,
-        default: 3
+        default: 1
       },
       searchField: {
         type: String,
@@ -63,6 +63,11 @@
         required: false,
         type: Boolean,
         default: false
+      },
+      isAddable: {
+        required: false,
+        type: Boolean,
+        default: true
       }
     },
     watch: {

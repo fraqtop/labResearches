@@ -22,4 +22,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('institutions', 'InstitutionController');
     Route::resource('users', 'UserController');
     Route::resource('researches', 'ResearchController');
+    Route::resource('analysis-types', 'AnalysisTypeController');
 });

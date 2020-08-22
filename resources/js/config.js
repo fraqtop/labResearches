@@ -11,7 +11,8 @@ export default {
     institutions: `${apiRoot}/institutions`,
     materials: `${apiRoot}/materials`,
     payTypes: `${apiRoot}/pay-types`,
-    researches: `${apiRoot}/researches`
+    researches: `${apiRoot}/researches`,
+    analysisTypes: `${apiRoot}/analysis-types`
   },
   defaultMessages: {
     '404': 'Не найдено',

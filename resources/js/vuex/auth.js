@@ -27,7 +27,6 @@ export default {
       return new Promise((resolve, reject) => {
         window.axios.post(this._vm.$config.routes.login, authData)
           .then(response => {
-            console.log(response.data)
             this.commit('setUserData', response.data)
             window.axios.defaults.headers.common['Authorization'] = this.getters.authHeader
             resolve(response)

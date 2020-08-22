@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Helpers\Filter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassAssignmentException;
+use Illuminate\Support\Str;
 
 abstract class Service
 {
@@ -17,12 +18,12 @@ abstract class Service
 
     public function getValidators(): array
     {
-        return ['name', ['required']];
+        return ['name' => ['required']];
     }
 
     public function create(array $data)
     {
-        $model = $this->class::create($data);
+        $model = $this->class::create($this->getSnakeInput($data));
         if (!$model) {
             throw new MassAssignmentException('can\'t save model');
         }
@@ -69,5 +70,13 @@ abstract class Service
         return $query;
     }
 
+    protected function getSnakeInput(array $data)
+    {
+        $result = [];
+        foreach ($data as $key => $value) {
+            $result[Str::snake($key)] = $value;
+        }
+        return $result;
+    }
 
 }

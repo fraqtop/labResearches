@@ -2,7 +2,11 @@
   <div>
     <b-button @click="isVisible = true" variant="info" class="font-weight-bold text-white">+</b-button>
     <b-modal v-model="isVisible" ref="insert-modal" hide-footer>
-      <component v-on="$listeners" :is="formType"/>
+      <component
+          v-on:saved="isVisible = false"
+          v-on="$listeners"
+          :is="formType"
+      />
     </b-modal>
   </div>
 </template>
@@ -13,7 +17,6 @@
   import Analysis from "./Analysis";
   import Material from "./Material";
   import Institution from "./Institution";
-  import User from "./User";
 
   export default {
     name: "Modal",
@@ -23,7 +26,6 @@
       'insert-analyses': Analysis,
       'insert-materials': Material,
       'insert-institutions': Institution,
-      'insert-users': User
     },
     props: {
       entityType: {

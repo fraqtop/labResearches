@@ -33,7 +33,7 @@ export default [
         component: NewResearch
       },
       {
-        path: '',
+        path: 'list',
         name: 'ResearchesList',
         component: ResearchesList
       }

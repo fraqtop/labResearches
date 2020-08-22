@@ -27,7 +27,7 @@ class ApiController extends Controller
     public function store(Request $request)
     {
         $request->validate($this->modelService->getValidators());
-        $this->modelService->create($request->post());
+        return $this->modelService->create($request->post());
     }
 
 }

@@ -13,16 +13,6 @@ class ResearchController extends ApiController
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  \App\Research  $research

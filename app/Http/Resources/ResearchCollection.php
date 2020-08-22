@@ -20,12 +20,14 @@ class ResearchCollection extends ResourceCollection
         return $this->map(function (Research $research) {
             return [
                 'id' => $research->id,
-                'code' => $research->code,
-                'duration' => $research->duration,
-                'price' => $research->price,
-                'description' => $research->description,
+                'analysis' => $research->analysis,
+                'executor' => $research->executor,
+                'patient' => $research->patient,
+                'user' => $research->user,
                 'self-link' => route('analyses.show', [$research->id]),
-                'type' => $research->type
+                'diagnosis' => $research->diagnosis,
+                'issuePlanedAt' => $research->issue_planed_at,
+                'issuedAt' => $research->issued_at
             ];
         });
     }

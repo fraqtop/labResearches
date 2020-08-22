@@ -30,21 +30,15 @@
 </template>
 
 <script>
-  import Saver from "../../mixins/save"
+  import save from "../../mixins/save"
   import CustomDatePicker from "../CustomDatePicker";
 
   export default {
     name: "Patient",
     components: {CustomDatePicker},
-    mixins: [Saver],
+    mixins: [save],
     data() {
       return {
-        saveData: {
-          name: null,
-          mail: null,
-          phone: null,
-          birthDate: null
-        },
         saveLink: this.$config.routes.patients
       }
     },
