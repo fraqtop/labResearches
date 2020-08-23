@@ -3,6 +3,7 @@ import PriceList from "./components/price/PriceList";
 import Login from "./components/Login";
 import ResearchesList from "./components/researches/List";
 import NewResearch from './components/researches/New';
+import CalendarIndex from './components/calendar/Index';
 
 export default [
   {
@@ -38,5 +39,10 @@ export default [
         component: ResearchesList
       }
     ]
+  },
+  {
+    path: '/calendar',
+    name: 'CalendarIndex',
+    component: CalendarIndex
   }
 ]
