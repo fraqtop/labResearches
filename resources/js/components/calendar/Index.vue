@@ -14,15 +14,22 @@
 
 <script>
 import Month from "./Month";
+import InsertHoliday from "../insert/Holiday";
 
 export default {
   name: "CalendarIndex",
-  components: {Month},
+  components: {InsertHoliday, Month},
   data() {
     return {
       months: [...Array(12).keys()],
-      holidays: {}
+      holidays: {},
+      selectedDay: {},
+      isFormVisible: false
     }
   },
+  created() {
+    window.axios(this.$config.routes.holidays)
+      .then(response => this.holidays = response.data)
+  }
 }
 </script>

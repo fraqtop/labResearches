@@ -12,7 +12,8 @@ export default {
     materials: `${apiRoot}/materials`,
     payTypes: `${apiRoot}/pay-types`,
     researches: `${apiRoot}/researches`,
-    analysisTypes: `${apiRoot}/analysis-types`
+    analysisTypes: `${apiRoot}/analysis-types`,
+    holidays: `${apiRoot}/holidays`
   },
   defaultMessages: {
     '404': 'Не найдено',

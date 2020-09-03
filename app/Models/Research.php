@@ -50,6 +50,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Research wherePayTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Research whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Research whereUserId($value)
+ * @property int $executor_id
+ * @property-read \App\Models\MaterialType|null $material
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Research whereExecutorId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Research whereRegisteredAt($value)
  */
 class Research extends Model
 {

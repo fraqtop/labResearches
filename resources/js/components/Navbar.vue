@@ -7,6 +7,9 @@
       <b-nav-item>
         <router-link :to="{name: 'PriceList'}">Прайс</router-link>
       </b-nav-item>
+      <b-nav-item>
+        <router-link :to="{name: 'CalendarIndex'}">Календарь</router-link>
+      </b-nav-item>
     </b-navbar-nav>
     <b-navbar-nav class="ml-auto">
       <b-nav-item-dropdown right>

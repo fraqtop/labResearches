@@ -106,6 +106,7 @@
   import LiveSearch from "../LiveSearch";
   import CustomDatePicker from "../CustomDatePicker";
   import requiredFields from "./requiredFields";
+  import holidaysFetchModes from "../calendar/holidaysFetchModes";
 
   export default {
     name: "New",
@@ -116,7 +117,8 @@
         analysis: null,
         error: null,
         description: null,
-        requiredFields: requiredFields
+        requiredFields: requiredFields,
+        holidays: []
       }
     },
     computed: {
@@ -134,7 +136,13 @@
       }
     },
     methods: {
-      getPlanDate(daysNumber) {
+      async getPlanDate(daysNumber) {
+        let response = await window.axios(`${this.$config.routes.holidays}?filters[mode]=${holidaysFetchModes.flat}`);
+        this.holidays = response.data;
+        this.$moment.updateLocale('ru', {
+          holidays: this.holidays,
+          holidayFormat: 'MM-DD-YYYY'
+        });
         let date = this.research.materialTakenAt ?
             this.$moment(this.research.materialTakenAt, this.$config.datetimeFormat) :
             this.$moment();

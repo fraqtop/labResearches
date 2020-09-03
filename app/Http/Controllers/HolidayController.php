@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\HolidayService;
-use App\Services\Service;
 use Illuminate\Http\Request;
 
 class HolidayController extends ApiController
@@ -12,6 +11,11 @@ class HolidayController extends ApiController
     public function __construct(HolidayService $modelService)
     {
         parent::__construct($modelService);
+    }
+
+    public function index(Request $request)
+    {
+        return $this->modelService->load($request->get('filters'));
     }
 
     /**
