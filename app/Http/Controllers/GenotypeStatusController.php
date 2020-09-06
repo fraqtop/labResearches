@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\GenotypeStatusService;
 use Illuminate\Http\Request;
 
 class GenotypeStatusController extends ApiController
 {
+
+    public function __construct(GenotypeStatusService $modelService)
+    {
+        parent::__construct($modelService);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -51,14 +57,4 @@ class GenotypeStatusController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\GenotypeStatus  $genotypeStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(GenotypeStatus $genotypeStatus)
-    {
-        //
-    }
 }

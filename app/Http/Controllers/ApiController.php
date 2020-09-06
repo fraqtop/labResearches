@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\Services\Service;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ApiController extends Controller
@@ -28,6 +29,13 @@ class ApiController extends Controller
     {
         $request->validate($this->modelService->getValidators());
         return $this->modelService->create($request->post());
+    }
+
+    public function destroy(int $id)
+    {
+        $this->modelService->delete($id);
+
+        return true;
     }
 
 }

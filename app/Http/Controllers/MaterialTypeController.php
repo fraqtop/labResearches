@@ -58,14 +58,4 @@ class MaterialTypeController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\MaterialType  $materialType
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(MaterialType $materialType)
-    {
-        //
-    }
 }

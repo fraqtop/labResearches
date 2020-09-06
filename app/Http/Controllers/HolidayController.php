@@ -62,14 +62,4 @@ class HolidayController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Holiday  $holiday
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Holiday $holiday)
-    {
-        //
-    }
 }

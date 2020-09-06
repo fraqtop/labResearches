@@ -13,7 +13,8 @@ export default {
     payTypes: `${apiRoot}/pay-types`,
     researches: `${apiRoot}/researches`,
     analysisTypes: `${apiRoot}/analysis-types`,
-    holidays: `${apiRoot}/holidays`
+    holidays: `${apiRoot}/holidays`,
+    genotypeStatuses: `${apiRoot}/genotype-statuses`
   },
   defaultMessages: {
     '404': 'Не найдено',

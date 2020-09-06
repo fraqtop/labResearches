@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Http\Resources\GenotypesCollection;
 use App\Models\Gene;
+use Illuminate\Container\Container;
 
 class GeneService extends Service
 {
@@ -24,19 +25,26 @@ class GeneService extends Service
 
     public function create(array $data)
     {
+        $data = $this->getSnakeInput($data);
         $gene = Gene::create($data);
-        if ($gene->description && $genomeTypes = $this->getGenomes($gene->description)) {
-            foreach ($genomeTypes as $status => $name) {
-                $gene->genotypes()->create([
-                    'name' => $name,
-                    'genotype_status_id' => $status
-                ]);
-            }
-        }
+        /** @var GenotypeService $genotypeService */
+        $genotypeService = Container::getInstance()->get(GenotypeService::class);
+        $genotypeService->create(
+            array_map(function ($genotype) use($gene) {
+                $genotype['gene_id'] = $gene->id;
+                return $genotype;
+            }, $data['genotypes'])
+        );
+
         return $gene;
     }
 
-    public function getGenomes(string $description)
+    public function setParent(int $analysisId, array $ids)
+    {
+        Gene::whereIn('id', $ids)->update(['analysis_id' => $analysisId]);
+    }
+
+    public function generateGenomes(string $description)
     {
         if (preg_match('/[\\w]+\\s*>\\s*[\\w]+/ui', $description, $matches)) {
             $descriptionParts = explode('>', $matches[0]);

@@ -64,15 +64,4 @@ class AnalysisController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Analysis  $analysis
-     * @return \Illuminate\Http\JsonResponse
-
-     */
-    public function destroy(Analysis $analysis)
-    {
-        $analysis->delete();
-    }
 }

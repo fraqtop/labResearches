@@ -56,14 +56,4 @@ class PayTypeController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\PayType  $payType
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PayType $payType)
-    {
-        //
-    }
 }

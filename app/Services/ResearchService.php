@@ -39,7 +39,7 @@ class ResearchService extends Service
             'patient',
             'user',
             'analysis'
-        ]);
+        ])->orderBy('issue_planed_at', 'desc');
     }
 
 }

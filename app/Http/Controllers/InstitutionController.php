@@ -56,14 +56,4 @@ class InstitutionController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Institution $institution)
-    {
-        //
-    }
 }

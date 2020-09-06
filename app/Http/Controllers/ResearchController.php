@@ -46,14 +46,4 @@ class ResearchController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Research  $research
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Research $research)
-    {
-        //
-    }
 }

@@ -41,8 +41,12 @@ abstract class Service
         if (!$filters) {
             return $query;
         }
-        $query = $this->applyFilters($query, (new $this->class())->getFillable(), $filters);
-        return $query;
+        return $this->applyFilters($query, (new $this->class())->getFillable(), $filters);
+    }
+
+    public function delete(int $id)
+    {
+        $this->class::destroy($id);
     }
 
     /**

@@ -6,6 +6,7 @@ namespace App\Services;
 
 use App\Http\Resources\AnalysisCollection;
 use App\Models\Analysis;
+use Illuminate\Container\Container;
 
 class AnalysisService extends Service
 {
@@ -20,5 +21,19 @@ class AnalysisService extends Service
     {
         return [];
     }
+
+    public function create(array $data)
+    {
+        $analysis = parent::create($data);
+
+        if (isset($data['genes'])) {
+            /** @var GeneService $geneService */
+            $geneService = Container::getInstance()->get(GeneService::class);
+            $geneService->setParent($analysis->id, $data['genes']);
+        }
+
+        return $analysis;
+    }
+
 
 }

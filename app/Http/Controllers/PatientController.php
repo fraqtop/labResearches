@@ -57,14 +57,4 @@ class PatientController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Patient  $patient
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Patient $patient)
-    {
-        //
-    }
 }

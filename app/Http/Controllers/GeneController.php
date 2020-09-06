@@ -78,14 +78,4 @@ class GeneController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  Gene  $gene
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Gene $gene)
-    {
-        //
-    }
 }

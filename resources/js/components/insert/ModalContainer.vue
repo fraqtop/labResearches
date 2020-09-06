@@ -1,7 +1,13 @@
 <template>
   <div>
-    <b-button @click="isVisible = true" variant="info" class="font-weight-bold text-white">+</b-button>
-    <b-modal v-model="isVisible" ref="insert-modal" hide-footer>
+    <b-button
+        @click="isVisible = true"
+        variant="info"
+        class="font-weight-bold text-white"
+    >
+      {{ buttonContent }}
+    </b-button>
+    <b-modal v-model="isVisible" ref="insert-modal" size="xl" hide-footer>
       <component
           v-on:saved="isVisible = false"
           v-on="$listeners"
@@ -31,6 +37,11 @@
       entityType: {
         required: true,
         type: String
+      },
+      buttonContent: {
+        required: false,
+        type: String,
+        default: '+'
       }
     },
     computed: {

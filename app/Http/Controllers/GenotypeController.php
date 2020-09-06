@@ -51,14 +51,4 @@ class GenotypeController extends ApiController
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Genotype  $genotype
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Genotype $genotype)
-    {
-        //
-    }
 }
