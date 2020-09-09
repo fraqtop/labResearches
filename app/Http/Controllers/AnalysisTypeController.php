@@ -15,17 +15,6 @@ class AnalysisTypeController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\AnalysisType  $analysisType
-     * @return \Illuminate\Http\Response
-     */
-    public function show(AnalysisType $analysisType)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

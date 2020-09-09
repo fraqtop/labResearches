@@ -25,6 +25,13 @@ class ApiController extends Controller
         return (new $collection($query->paginate($this->perPage)))->response();
     }
 
+    public function show(int $id)
+    {
+        $query = $this->modelService->loadOne($id);
+        $resource = $this->modelService->getResourceClass();
+        return (new $resource($query->first()))->response();
+    }
+
     public function store(Request $request)
     {
         $request->validate($this->modelService->getValidators());

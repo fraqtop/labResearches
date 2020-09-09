@@ -30,7 +30,7 @@
         analyses: null,
         filters: '',
         pageNumber: 1,
-        isLastPage: false
+        isLastPage: true
       }
     },
     created() {

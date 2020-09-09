@@ -5,7 +5,9 @@ namespace App\Services;
 
 
 use App\Http\Resources\ResearchCollection;
+use App\Http\Resources\ResearchResource;
 use App\Models\Research;
+use Illuminate\Database\Eloquent\Builder;
 
 class ResearchService extends Service
 {
@@ -15,6 +17,12 @@ class ResearchService extends Service
     {
         return ResearchCollection::class;
     }
+
+    public function getResourceClass(): string
+    {
+        return ResearchResource::class;
+    }
+
 
     public function getValidators(): array
     {
@@ -41,5 +49,19 @@ class ResearchService extends Service
             'analysis'
         ])->orderBy('issue_planed_at', 'desc');
     }
+
+    public function loadOne(int $id): Builder
+    {
+        return parent::loadOne($id)->with([
+            'patient',
+            'executor',
+            'initiator',
+            'user',
+            'material',
+            'analysis',
+            'payType',
+        ]);
+    }
+
 
 }

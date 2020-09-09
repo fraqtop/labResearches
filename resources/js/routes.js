@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import ResearchesList from "./components/researches/List";
 import NewResearch from './components/researches/New';
 import CalendarIndex from './components/calendar/Index';
+import ResearchShow from './components/researches/Show';
 
 export default [
   {
@@ -37,6 +38,12 @@ export default [
         path: 'list',
         name: 'ResearchesList',
         component: ResearchesList
+      },
+      {
+        path: ':id',
+        name: 'ResearchShow',
+        component: ResearchShow,
+        props: true
       }
     ]
   },

@@ -39,4 +39,9 @@ class Analysis extends Model
     {
         return $this->belongsTo(AnalysisType::class, 'type_id', 'id');
     }
+
+    public function genes()
+    {
+        return $this->hasMany(Gene::class, 'analysis_id', 'id');
+    }
 }

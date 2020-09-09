@@ -29,17 +29,6 @@ class HolidayController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Holiday  $holiday
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Holiday $holiday)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Holiday  $holiday

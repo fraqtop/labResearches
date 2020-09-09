@@ -23,17 +23,6 @@ class InstitutionController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Institution  $institution
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Institution $institution)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Institution  $institution

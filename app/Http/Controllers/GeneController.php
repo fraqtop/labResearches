@@ -45,17 +45,6 @@ class GeneController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  Gene  $gene
-     * @return JsonResource
-     */
-    public function show(Gene $gene)
-    {
-        return new GeneResource($gene);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  Gene  $gene

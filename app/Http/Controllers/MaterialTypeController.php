@@ -23,18 +23,6 @@ class MaterialTypeController extends ApiController
         //
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\MaterialType  $materialType
-     * @return \Illuminate\Http\Response
-     */
-    public function show(MaterialType $materialType)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      *

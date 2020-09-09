@@ -13,17 +13,6 @@ class ResearchController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Research  $research
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Research $research)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Research  $research

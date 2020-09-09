@@ -19,17 +19,6 @@ class GenomeStatusController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\GenomeStatus  $genomeStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(GenomeStatus $genomeStatus)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\GenomeStatus  $genomeStatus

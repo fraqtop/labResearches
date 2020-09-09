@@ -30,7 +30,7 @@ export default [
     sortable: true
   },
   {
-    key: 'registeredAt',
+    key: 'issuedAt',
     label: 'Фактическая выдача',
     sortable: true
   },

@@ -5,6 +5,9 @@
     </b-navbar-brand>
     <b-navbar-nav>
       <b-nav-item>
+        <router-link :to="{name: 'ResearchesList'}">Журнал</router-link>
+      </b-nav-item>
+      <b-nav-item>
         <router-link :to="{name: 'PriceList'}">Прайс</router-link>
       </b-nav-item>
       <b-nav-item>
@@ -33,7 +36,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

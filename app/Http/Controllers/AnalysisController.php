@@ -28,18 +28,6 @@ class AnalysisController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Analysis  $analysis
-     * @return \Illuminate\Http\JsonResponse
-
-     */
-    public function show(Analysis $analysis)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  Analysis  $analysis

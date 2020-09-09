@@ -23,17 +23,6 @@ class PayTypeController extends ApiController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\PayType  $payType
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PayType $payType)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\PayType  $payType

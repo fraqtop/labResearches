@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Helpers\Filter;
+use App\Http\Resources\DictionaryResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassAssignmentException;
 use Illuminate\Support\Str;
@@ -14,7 +15,12 @@ abstract class Service
     protected string $error;
     protected string $class;
 
-    public abstract function getCollectionClass() : string;
+    public abstract function getCollectionClass(): string;
+
+    public function getResourceClass(): string
+    {
+        return DictionaryResource::class;
+    }
 
     public function getValidators(): array
     {
@@ -42,6 +48,11 @@ abstract class Service
             return $query;
         }
         return $this->applyFilters($query, (new $this->class())->getFillable(), $filters);
+    }
+
+    public function loadOne(int $id): Builder
+    {
+        return $this->class::query()->where('id', $id);
     }
 
     public function delete(int $id)
