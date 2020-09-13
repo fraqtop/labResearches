@@ -10,7 +10,7 @@ export default [
   {
     path: '/',
     name: 'Index',
-    component: Index
+    component: ResearchesList
   },
   {
     path: '/price',
