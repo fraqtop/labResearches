@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\FileHelper;
 use App\Services\ResearchService;
 use Illuminate\Http\Request;
+use Storage;
 
 class ResearchController extends ApiController
 {
-    public function __construct(ResearchService $modelService)
+    private FileHelper $fileHelper;
+
+    public function __construct(ResearchService $modelService, FileHelper $fileHelper)
     {
+        $this->fileHelper = $fileHelper;
+        $this->fileHelper->setCache(Storage::path('cache/'));
         parent::__construct($modelService);
     }
 
@@ -21,6 +27,24 @@ class ResearchController extends ApiController
     public function edit(Research $research)
     {
         //
+    }
+
+    public function setResults(Request $request, $id)
+    {
+        $this->modelService->complete($id, $request->post('results'), 'you are dead man');
+
+
+        return [];
+    }
+
+    public function print(int $id)
+    {
+        $data = $this->modelService->prepareReportData($id);
+        $documentData = $this->fileHelper->getFile(Storage::path('template.docx'), $data);
+
+        return [
+            'url' => $documentData
+        ];
     }
 
     /**

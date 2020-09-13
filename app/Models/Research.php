@@ -33,6 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property MaterialType $materialType
  * @property Analysis $analysis
  * @property User $user
+ * @property Genotype[] $genotypes
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Research whereAnalysisId($value)
@@ -93,5 +94,10 @@ class Research extends Model
     public function initiator()
     {
         return $this->belongsTo(Institution::class, 'initiator_id', 'id');
+    }
+
+    public function genotypes()
+    {
+        return $this->belongsToMany(Genotype::class)->with(['gene']);
     }
 }

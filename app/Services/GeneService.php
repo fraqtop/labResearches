@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Http\Resources\GenotypesCollection;
+use App\Http\Resources\GenesCollection;
 use App\Models\Gene;
 use Illuminate\Container\Container;
 
@@ -14,7 +14,7 @@ class GeneService extends Service
 
     public function getCollectionClass(): string
     {
-        return GenotypesCollection::class;
+        return GenesCollection::class;
     }
 
     public function getValidators(): array

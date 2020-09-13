@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Gene extends Model
 {
-    protected $fillable = ['name', 'coords', 'description'];
+    protected $fillable = ['name', 'coords', 'description', 'analysis_id'];
 
     public function genotypes()
     {

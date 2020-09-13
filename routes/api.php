@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('pay-types', 'PayTypeController');
     Route::resource('institutions', 'InstitutionController');
     Route::resource('users', 'UserController');
+    Route::post('/researches/{id}/results', 'ResearchController@setResults');
+    Route::get('/researches/{id}/print', 'ResearchController@print');
     Route::resource('researches', 'ResearchController');
     Route::resource('analysis-types', 'AnalysisTypeController');
     Route::resource('holidays', 'HolidayController');

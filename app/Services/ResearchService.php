@@ -6,8 +6,10 @@ namespace App\Services;
 
 use App\Http\Resources\ResearchCollection;
 use App\Http\Resources\ResearchResource;
+use App\Models\Genotype;
 use App\Models\Research;
 use Illuminate\Database\Eloquent\Builder;
+use DB;
 
 class ResearchService extends Service
 {
@@ -61,6 +63,45 @@ class ResearchService extends Service
             'analysis',
             'payType',
         ]);
+    }
+
+    public function complete(int $id, array $genotypes, string $diagnosis)
+    {
+        $data = array_map(fn ($genotype) => ['research_id' => $id, 'genotype_id' => $genotype], $genotypes);
+        DB::table('genotype_research')->insert($data);
+    }
+
+    public function prepareReportData(int $id): array
+    {
+        /** @var Research $research */
+        $research = $this->loadOne($id)->first();
+
+        $genes = $research->genotypes->reduce(function (array $result, Genotype $item) {
+            $result[] = [
+                'name' => $item->gene->name,
+                'coords' => $item->gene->coords,
+                'description' => $item->gene->description,
+                'genotype' => $item->name,
+                'typeDescription' => $item->description
+            ];
+            $result['geneListName'][] = 'Ген ' . $item->gene->name;
+            $result['geneListDescription'][] = $item->gene->description;
+            return $result;
+        }, []);
+
+        return [
+            'clientName' => $research->patient->name,
+            'clientBirthDate' => $research->patient->birth_date,
+            'innerNumber' => $research->inner_number,
+            'initiatorName' => $research->initiator->name,
+            'doctorName' => $research->user->name,
+            'issuedDate' => $research->issued_at,
+            'diagnosis' => explode('.', $research->diagnosis),
+            'recommendations' => explode('.', $research->diagnosis),
+            'genes' => $genes,
+            'geneListName' => $genes['geneListName'],
+            'geneListDescription' => $genes['geneListDescription']
+        ];
     }
 
 

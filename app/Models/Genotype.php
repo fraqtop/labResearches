@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property string|null $description
  * @property int $gene_id
+ * @property Gene $gene
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Genotype newModelQuery()
@@ -35,5 +36,10 @@ class Genotype extends Model
     public function status()
     {
         return $this->belongsTo(GenotypeStatus::class, 'genotype_status_id', 'id');
+    }
+
+    public function gene()
+    {
+        return $this->hasOne(Gene::class, 'id', 'gene_id');
     }
 }
