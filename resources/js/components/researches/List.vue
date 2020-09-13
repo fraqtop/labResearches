@@ -10,7 +10,7 @@
     <custom-pagination v-show="!page.isLast"/>
     <b-modal v-if="selectedResearch" v-model="isResultsShown" hide-footer>
       <h4>Результаты исследования №{{selectedResearch.id}}</h4>
-      <b-row v-for="gene in genes" v-bind:key="gene.id">
+      <b-row v-for="gene in genes" v-bind:key="gene.id" class="m-2">
         <b-col>
           <p>{{gene.name}}</p>
         </b-col>
@@ -22,6 +22,16 @@
               value-field="id"
               :options="gene.genotypes"
           />
+        </b-col>
+      </b-row>
+      <b-row class="m-2">
+        <b-col>
+          <b-textarea v-model="saveData.diagnosis" placeholder="Диагноз"/>
+        </b-col>
+      </b-row>
+      <b-row class="m-2">
+        <b-col>
+          <b-textarea v-model="saveData.recommendations" placeholder="Рекоммендации"/>
         </b-col>
       </b-row>
       <b-row>
@@ -70,7 +80,7 @@
         })
       },
       saveLink: function () {
-        return `${this.$config.routes.researches}/${this.selectedResearch}/results`
+        return `${this.$config.routes.researches}/${this.selectedResearch.id}/results`
       },
       isCompleted: function () {
         return this.selectedResearch && this.selectedResearch.issuedAt
@@ -86,9 +96,12 @@
           holidays: response.data,
           holidayFormat: 'MM-DD-YYYY'
         });
+        this.loadResearches();
+      },
+      loadResearches() {
         window.axios(this.$config.routes.researches)
-          .then(response => this.researches = response.data.items)
-          .catch(error => console.log(error.response));
+            .then(response => this.researches = response.data.items)
+            .catch(error => console.log(error.response));
       },
       getFillVariant(research) {
         let result = '';
@@ -122,7 +135,11 @@
       },
       wrappedSave() {
         if (this.isValid()) {
-          this.save();
+          this.syncSave()
+            .then(() => {
+              this.loadResearches();
+              this.isResultsShown = false;
+            })
         }
       },
       isValid() {
@@ -133,7 +150,13 @@
             return false
           }
         }
-        return true
+        if (!this.saveData.diagnosis) {
+          this.errorMessage = 'Укажите диагноз';
+        }
+        if (!this.saveData.recommendations) {
+          this.errorMessage = 'Укажите рекоммендации';
+        }
+        return this.errorMessage === null;
       },
       print() {
         window.axios(`${this.$config.routes.researches}/${this.selectedResearch.id}/print`)

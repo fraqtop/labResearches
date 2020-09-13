@@ -26,6 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $issue_planed_at
  * @property string|null $issued_at
  * @property string|null $comment
+ * @property string|null $recommendations
  * @property Institution $initiator
  * @property Institution $executor
  * @property Patient $patient

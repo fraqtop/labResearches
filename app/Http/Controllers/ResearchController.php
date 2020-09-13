@@ -31,8 +31,12 @@ class ResearchController extends ApiController
 
     public function setResults(Request $request, $id)
     {
-        $this->modelService->complete($id, $request->post('results'), 'you are dead man');
-
+        $this->modelService->complete(
+            $id,
+            $request->post('results'),
+            $request->post('diagnosis'),
+            $request->post('recommendations')
+        );
 
         return [];
     }

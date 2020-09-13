@@ -8,6 +8,7 @@ use App\Http\Resources\ResearchCollection;
 use App\Http\Resources\ResearchResource;
 use App\Models\Genotype;
 use App\Models\Research;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use DB;
 
@@ -65,10 +66,15 @@ class ResearchService extends Service
         ]);
     }
 
-    public function complete(int $id, array $genotypes, string $diagnosis)
+    public function complete(int $id, array $genotypes, string $diagnosis, string $recommendations)
     {
         $data = array_map(fn ($genotype) => ['research_id' => $id, 'genotype_id' => $genotype], $genotypes);
         DB::table('genotype_research')->insert($data);
+        $research = Research::find($id);
+        $research->diagnosis = $diagnosis;
+        $research->recommendations = $recommendations;
+        $research->issued_at = Carbon::now();
+        $research->save();
     }
 
     public function prepareReportData(int $id): array
@@ -97,7 +103,7 @@ class ResearchService extends Service
             'doctorName' => $research->user->name,
             'issuedDate' => $research->issued_at,
             'diagnosis' => explode('.', $research->diagnosis),
-            'recommendations' => explode('.', $research->diagnosis),
+            'recommendations' => explode('.', $research->recommendations),
             'genes' => $genes,
             'geneListName' => $genes['geneListName'],
             'geneListDescription' => $genes['geneListDescription']
