@@ -1,5 +1,12 @@
 <template>
   <div class="fade-in mx-5">
+    <b-button variant="info" class="m-2" v-b-toggle.research-form>
+      Добавить
+    </b-button>
+    <b-collapse id="research-form">
+      <research-form v-on:saved="loadResearches"/>
+    </b-collapse>
+    <b-spinner v-show="isPending" variant="info" class="loader"/>
     <b-table
         :items="colouredResearches"
         :fields="fields"
@@ -7,7 +14,7 @@
         class="table-clickable"
         @row-clicked="rowClickHandler"
     />
-    <custom-pagination v-show="!page.isLast"/>
+    <custom-pagination @click.native="loadResearches" :meta="meta"/>
     <b-modal v-if="selectedResearch" v-model="isResultsShown" hide-footer>
       <h4>Результаты исследования №{{selectedResearch.id}}</h4>
       <b-row v-for="gene in genes" v-bind:key="gene.id" class="m-2">
@@ -49,12 +56,14 @@
   import holidaysFetchModes from "../calendar/holidaysFetchModes";
   import Pagination from "../Pagination";
   import save from "../../mixins/save";
+  import researchForm from "./New";
 
   export default {
     name: "ResearchesList",
     mixins: [save],
     components: {
       'custom-pagination': Pagination,
+      'research-form': researchForm
     },
     data() {
       return {
@@ -70,7 +79,9 @@
           number: 1
         },
         selectedResearch: null,
-        isResultsShown: false
+        isResultsShown: false,
+        isPending: false,
+        meta: {}
       }
     },
     computed: {
@@ -99,9 +110,14 @@
         this.loadResearches();
       },
       loadResearches() {
-        window.axios(this.$config.routes.researches)
-            .then(response => this.researches = response.data.items)
-            .catch(error => console.log(error.response));
+        this.isPending = true;
+        window.axios(`${this.$config.routes.researches}?page=${this.meta.currentPage + 1}`)
+            .then(response => {
+              this.researches = this.researches.concat(response.data.items);
+              this.meta = response.data.meta;
+            })
+            .catch(error => console.log(error.response))
+            .finally(() => this.isPending = false)
       },
       getFillVariant(research) {
         let result = '';

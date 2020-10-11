@@ -1,5 +1,5 @@
 <template>
-  <b-row class="w-100">
+  <b-row v-show="meta.currentPage !== meta.lastPage" class="w-100">
     <b-col class="centered pagination clickable">
       <p class="p-2 m-0 text-bold">Загрузить ещё</p>
     </b-col>
@@ -8,7 +8,13 @@
 
 <script>
   export default {
-    name: "Pagination"
+    name: "Pagination",
+    props: {
+      meta: {
+        type: Object,
+        required: true
+      }
+    }
   }
 </script>
 

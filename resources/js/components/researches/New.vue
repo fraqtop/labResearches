@@ -126,8 +126,10 @@
     },
     watch: {
       analysis: function () {
-        this.research.analysisId = this.analysis.id;
-        this.getPlanDate(this.analysis.duration);
+        if (this.analysis) {
+          this.research.analysisId = this.analysis.id;
+          this.getPlanDate(this.analysis.duration);
+        }
       },
       dateStart: function () {
         if (this.analysis) {
@@ -159,7 +161,10 @@
           return ;
         }
         window.axios.post(this.$config.routes.researches, this.research)
-          .then(() => this.$router.push({name: 'ResearchesList'}))
+          .then(() => {
+            this.refresh();
+            this.$emit('saved');
+          })
           .catch(error => console.log(error.response))
       },
       validate() {
@@ -177,6 +182,11 @@
           this.error = 'Материал не может быть взят раньше даты поступления'
         }
         return this.error === null;
+      },
+      refresh() {
+        this.research = {};
+        this.analysis = null;
+        this.description = null;
       }
     }
   }

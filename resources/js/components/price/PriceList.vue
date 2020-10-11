@@ -9,7 +9,7 @@
     </div>
     <b-row class="centered">
       <b-col class="w-50 p-0" style="max-width: 50%">
-        <custom-pagination v-show="!isLastPage" @click.native="loadAnalyses"/>
+        <custom-pagination :meta="meta" @click.native="loadAnalyses"/>
       </b-col>
     </b-row>
   </b-container>
@@ -29,24 +29,27 @@
       return {
         analyses: null,
         filters: '',
-        pageNumber: 1,
-        isLastPage: true
+        meta: {}
       }
     },
     created() {
       this.loadAnalyses()
     },
+    computed: {
+      pageToLoad() {
+        return this.meta.currentPage ? this.meta.currentPage + 1 : 1;
+      }
+    },
     methods: {
       loadAnalyses(payload) {
         if (payload && payload.query !== undefined) {
           this.filters = payload.query
-          this.pageNumber = 1
+          this.meta = {}
         }
-        axios(`${this.$config.routes.analyses}?page=${this.pageNumber}${this.filters}`)
+        axios(`${this.$config.routes.analyses}?page=${this.pageToLoad}${this.filters}`)
           .then(response => {
-            this.analyses = this.pageNumber === 1 ? response.data.items: this.analyses.concat(response.data.items)
-            this.pageNumber += 1
-            this.isLastPage = response.data.links.next === null
+            this.meta = response.data.meta;
+            this.analyses = this.meta.currentPage === 1 ? response.data.items: this.analyses.concat(response.data.items)
           })
           .catch(error => console.log(error))
       },

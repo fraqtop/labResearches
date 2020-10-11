@@ -45,3 +45,11 @@
     }
   }
 </script>
+
+<style>
+.loader {
+  position: absolute;
+  top: 45vh;
+  left: 45%;
+}
+</style>

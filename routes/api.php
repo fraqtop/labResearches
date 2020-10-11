@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\TransformOutput;
 use Illuminate\Http\Request;
 
 /*
@@ -13,7 +14,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => ['auth:sanctum', TransformOutput::class]], function () {
     Route::resource('analyses', 'AnalysisController');
     Route::resource('genes', 'GeneController');
     Route::resource('patients', 'PatientController');
